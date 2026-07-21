@@ -1,4 +1,4 @@
-**Inner Join**
+**Level 1 (Easy) - Basic Joins**
 1. Display all customers along with their order.
 2. Display each order with it's payment details.
 3. Show all products with their categories.
