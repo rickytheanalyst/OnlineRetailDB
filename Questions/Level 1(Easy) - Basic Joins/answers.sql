@@ -64,7 +64,7 @@ ON i.WarehouseID = w.WarehouseID;
 -------------------------------------------------------------------
 -- 8. Display customer name and payment method.
 SELECT 
-    CONCAT(c.FirstName, ' ', c.LastName) AS Customer_Name,
+    c.FirstName + ' ' + c.LastName AS "Customer_Name",
     p.PaymentMethod
 FROM Orders o
 INNER JOIN Customers c
