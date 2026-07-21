@@ -1,3 +1,5 @@
+**Level 2 (Medium) - 3 Tables**
+
 1. Display customer name, order ID and payment amount.
 2. Show customer name, employee name and order date.
 3. Display customer name, shipper name and order status.
