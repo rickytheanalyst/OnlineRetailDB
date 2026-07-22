@@ -126,7 +126,7 @@ FROM Inventory i
 INNER JOIN Warehouses w
     ON i.WarehouseID = w.WarehouseID
 GROUP BY w.WarehouseID, w.WarehouseName
-ORDER BY w.WarehouseID
+ORDER BY w.WarehouseID;
 --------------------------------------------------------------------------
 -- 13. Show customers who purchased Electronics.
 SELECT DISTINCT
@@ -140,7 +140,7 @@ INNER JOIN Orders o
     ON oi.OrderID = o.OrderID
 INNER JOIN Customers cu
     ON o.CustomerID = cu.CustomerID
-WHERE c.CategoryName = 'Electronics'
+WHERE c.CategoryName = 'Electronics';
 --------------------------------------------------------------------------
 -- 14. Show customers who purchased Books.
 SELECT DISTINCT
@@ -154,7 +154,7 @@ INNER JOIN Orders o
     ON oi.OrderID = o.OrderID
 INNER JOIN Customers cu
     ON o.CustomerID = cu.CustomerID
-WHERE c.CategoryName = 'Books'
+WHERE c.CategoryName = 'Books';
 --------------------------------------------------------------------------
 -- 15. Display products purchased by each customer.
 SELECT DISTINCT
@@ -168,4 +168,50 @@ INNER JOIN OrderItems oi
     ON oi.OrderID = o.OrderID
 INNER JOIN Products p
     ON oi.ProductID  = p.ProductID
-ORDER BY o.CustomerID
+ORDER BY o.CustomerID;
+--------------------------------------------------------------------------
+-- 16. Display orders shipped by Blue Dart.
+SELECT
+    o.*,
+	oi.*
+FROM Orders o
+INNER JOIN Shippers s
+ON         o.ShipperID = s.ShipperID
+INNER JOIN OrderItems oi
+ON         o.OrderID = oi.OrderID
+WHERE s.CompanyName = 'Blue Dart';
+--------------------------------------------------------------------------
+-- 17. Show orders paid using UPI.
+SELECT 
+    *
+FROM Orders o
+INNER JOIN Payments p
+ON         o.OrderID= p.OrderID
+WHERE p.PaymentMethod = 'UPI';
+--------------------------------------------------------------------------
+-- 18. Display products supplied from India.
+SELECT 
+    p.ProductID,
+	p.ProductName
+FROM Products p
+INNER JOIN Suppliers s
+ON         p.SupplierID = s.SupplierID
+WHERE s.Country = 'India'
+GROUP BY p.ProductID, p.ProductName;
+--------------------------------------------------------------------------
+-- 19. Show customers from Hyderabad who placed orders.
+SELECT DISTINCT
+    c.CustomerID,
+	c.FirstName + ' ' + c.LastName AS 'Customer Name'
+FROM Customers c
+INNER JOIN Orders o
+ON         c.CustomerID = o.CustomerID
+WHERE c.City = 'Hyderabad';
+--------------------------------------------------------------------------
+-- 20. Show employees from the Sales department who handled orders.
+SELECT DISTINCT
+    e.*
+FROM Employees e
+INNER JOIN Orders o
+ON         e.EmployeeID = o.EmployeeID
+WHERE e.Department = 'Sales';
